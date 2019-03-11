@@ -3,7 +3,7 @@
 ############################################################
 
 # Set the base image
-FROM alpine:latest
+FROM docker:stable-dind
 
 ############################################################
 # Configuration
@@ -14,12 +14,12 @@ ENV VERSION "0.3.6"
 # Installation
 ############################################################
 
-RUN apk add --no-cache bash curl &&\
+RUN apk add --no-cache bash curl > /dev/null &&\
     curl -L -o /usr/local/bin/goss https://github.com/aelsabbahy/goss/releases/download/v${VERSION}/goss-linux-amd64 &&\
     curl -L -o /usr/local/bin/dgoss https://raw.githubusercontent.com/aelsabbahy/goss/v${VERSION}/extras/dgoss/dgoss &&\
     chmod +x /usr/local/bin/goss &&\
     chmod +x /usr/local/bin/dgoss &&\
-	apk del curl
+	apk del --no-cache curl > /dev/null
 
 ############################################################
 # Execution
